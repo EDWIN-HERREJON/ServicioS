@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LAboratorio en Casa">
+    
+    <title>Laboratorio En Casa</title>
+    <!-- Preload -->
+    <link rel="preload" href="{{ url_for("static", filename="normalize.css") }}" as="style">
+    <link rel="stylesheet" href="{{ url_for("static", filename="normalize.css") }}">
+
+    <link rel="preload" href="{{ url_for("static", filename="styles.css") }}" as="style">
+    <link rel="stylesheet" href="{{ url_for("static", filename="styles.css") }}">
+
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&display=swap" crossorigin="crossorigin" as="font">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+            <a class="logo" href= "/">
+                <img class="img" src="/static/img/FES.png">
+                <h1 class="logo__nombre no-margin centrar-texto">Laboratorio en Casa</span> </h1>
+            </a>
+    </header>
+
+    <div class="interruptor">
+        <div class="contenedor">
+            
+            <div>
+                <input class="boton" type="button" Value="3v" onclick="cambioLed(17,1)">
+            </div>
+            
+            <div>
+                <input class="boton" type="button" Value="5v" onclick="cambioLed(18,1)">
+            </div>
+            
+            <div>
+                <input class="boton" type="button" Value="9v" onclick="cambioLed(27,1)">
+            </div>  
+            
+            <div>
+                <input class="boton" type="button" Value="12v" onclick="cambioLed(22,1)">
+            </div>  
+            <!--
+            {% if volts == 0 %}
+                <h1>0v</h1>
+            {% elif volts == 3 %}
+                <h1>3v</h1>
+            {% elif volts == 5 %}
+                <h1>5v</h1>
+            {% elif volts == 9 %}
+                <h1>9v</h1>
+            {% elif volts == 12 %}
+                <h1>12v</h1>
+            {% endif %} -->
+        </div>
+    </div>
+    <img src="http://192.168.100.7:8081" height="400" width="400" />
+    
+</body>
+
+<script>
+    function cambioLed(led,value){
+        address = "http://192.168.100.7" + "/"+led+"/"+value;
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", address, true);
+        xhttp.send();
+
+        
+    }
+    /*function updateVolts(){
+        var request;
+        if(Window.XMLHttpRequest){
+            request = new window.XMLHttpRequest();
+        } else{
+            request = new window.ActiveXObject("Microsoft.XMLHTTP");
+        }
+        request.open("GET", "control_led.py", true);
+        request.send();
+    }*/
+</script>
+
